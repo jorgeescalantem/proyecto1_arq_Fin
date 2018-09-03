@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>Validación un formulario</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+
+    <script type="text/javascript">
+        function valida(f) {
+            var ok = true;
+            var msg = "Debes escribir algo en los campos:\n";
+            if (f.elements[0].value == "") {
+                msg += " Usuario\n";
+                ok = false;
+            }
+            if (f.elements["fnacimiento"].value == "") {
+                msg += " Fecha de nacimiento";
+                ok = false;
+            }
+            if (ok == false)
+                alert(msg);
+            return ok;
+        }
+    $(function () {
+             //$.fn.datepicker.defaults.format = "dd/mm/yyyy";
+            $.datepicker.setDefaults($.datepicker.regional["es"]);
+            $("#fnacimiento").datepicker({
+               firstDay: 1,
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+        $(function () {
+$("#fnacimiento").datepicker("setDate", "-18y");
+});
+
+ function limpia(){
+     document.getElementById("pp").reset();
+ }
+
+    </script>
+</head>
+
+<body>
+    
+    <center>
+        <h2>Bienvenido Ingrese los datos del formulario para comenzar</h2><br><br><br>
+                    
+        <form action="calcular" method="POST" onsubmit="return valida(this)" target="pp" >
+            <table width="201" border="0">
+                <tr>
+                    <td width="73">Usuario</td>
+                    <td>
+                    <label for="usuario"></label>
+                    <input type="text" name="nusuario" id="nusuario" />  <br/>
+                    </td>
+                </tr>  
+                
+                <tr>
+            <td width="73">Fecha de nacimiento</td>
+            <td>
+                <label for="Fecha_de_nacimiento"></label>
+                <input type="text" name="fnacimiento" id="fnacimiento"/><br/>
+                
+            </td>
+            </tr>
+                <tr>
+                    <td>
+                    <input type="submit" name="calcular" value="Enviar" />
+                    </td>
+                    <td>
+                        <input type="reset" value="Borrar" name="limpiar" id="limpiar" />
+                    </td>
+                </tr>
+            </table>
+                <br/>
+            <iframe name="pp" id="pp" style="position:down; top:-9000px;"></iframe>
+    </form>
+
+       
+
+       </p>
+        </center>
+</body>
+
+</html>
